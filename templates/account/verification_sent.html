@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block content %}
+<section class="contact-section pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="blog-contact-form contact-form">
+                    <h2 class="title mb-0">{% trans "Verify Your Email Address" %}</h2>
+                    <p class="mb-30 mt-10">
+                        {% blocktrans %}
+                            We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.
+                        {% endblocktrans %}
+                    </p>
+
+                    <!-- Optional: Add a button to resend the verification email -->
+                    <div class="text-center mt-4">
+                        <p>
+                            <strong>Didn't receive the email?</strong>
+                            <a href="{% url 'account_email' %}" class="text-primary">Resend verification email</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

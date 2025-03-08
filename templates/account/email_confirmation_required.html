@@ -1,4 +1,4 @@
-<!-- templates/account/password_reset_from_key_done.html -->
+<!-- templates/account/email_confirmation_required.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -8,13 +8,10 @@
             <!-- Confirmation Message -->
             <div class="col-lg-7">
                 <div class="blog-contact-form contact-form">
-                    <h2 class="title mb-0">Password Reset Successful</h2>
+                    <h2 class="title mb-0">Email Confirmation Required</h2>
                     <p class="mb-30 mt-10">
-                        Your password has been successfully reset. You can now log in with your new password.
+                        Please confirm your email address to access this page. Check your inbox for the confirmation email.
                     </p>
-                    <div class="text-center mt-4">
-                        <a href="{% url 'account_login' %}" class="ed-primary-btn">Log In</a>
-                    </div>
                 </div>
             </div>
 
@@ -22,8 +19,8 @@
             <div class="col-lg-5 col-md-12">
                 <div class="contact-content">
                     <div class="contact-top">
-                        <h3 class="title">Welcome Back!</h3>
-                        <p>“Success is the sum of small efforts, repeated day in and day out.” – Robert Collier</p>
+                        <h3 class="title">Stay Connected</h3>
+                        <p>“Communication is the key to success.”</p>
                     </div>
                 </div>
             </div>
