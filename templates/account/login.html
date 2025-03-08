@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section class="contact-section pt-120 pb-120">
+    <div class="container">
+        <div class="row gy-lg-0 gy-5">
+            <!-- Form Section -->
+            <div class="col-lg-7">
+                <div class="blog-contact-form contact-form">
+                    <h2 class="title mb-0">Login</h2>
+                    <p class="mb-30 mt-10">Welcome back! Please log in to continue.</p>
+                    <div class="request-form">
+                        <form action="{% url 'account_login' %}" method="post" id="ajax_contact" class="form-horizontal">
+                            {% csrf_token %}
+                            <!-- Email -->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="form-item">
+                                        {% render_field form.login class="form-control" placeholder="Your Email" %}
+                                        <div class="icon"><i class="fa-regular fa-envelope"></i></div>
+                                    </div>
+                                    {% if form.login.errors %}
+                                        <div class="text-danger">
+                                            {{ form.login.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Password -->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="form-item">
+                                        {% render_field form.password class="form-control" placeholder="Your Password" %}
+                                        <div class="icon"><i class="fa-solid fa-lock"></i></div>
+                                    </div>
+                                    {% if form.password.errors %}
+                                        <div class="text-danger">
+                                            {{ form.password.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="submit-btn mb-4">
+                                <button id="submit" class="ed-primary-btn" type="submit">Login</button>
+                            </div>
+
+                            <!-- Links for Sign Up and Reset Password -->
+                            <div class="text-center mt-4">
+                                <p class="mb-2">
+                                    <strong>Don't have an account?</strong> 
+                                    <a href="{% url 'account_signup' %}" class="text-primary">Sign Up</a>
+                                </p>
+                                <p>
+                                    <strong>Forgot your password?</strong> 
+                                    <a href="{% url 'account_reset_password' %}" class="text-primary">Reset it here</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inspiring Quote and Learning Information -->
+            <div class="col-lg-5 col-md-12">
+                <div class="contact-content">
+                    <div class="contact-top">
+                        <h3 class="title">Welcome Back!</h3>
+                        <p>“Success usually comes to those who are too busy to be looking for it.” – Henry David Thoreau</p>
+                    </div>
+                    <div class="contact-list">
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-rocket"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">Accelerate Your Learning</h4>
+                                <p>Join our vibrant learning community and build new skills for your future success.</p>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-cogs"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">Easy Access</h4>
+                                <p>Log in and resume your journey right where you left off.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
