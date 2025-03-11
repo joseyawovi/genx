@@ -37,9 +37,16 @@
       
       - all other that are needed
       
-11 March 2025
+##           #    ###########.      11 March 2025
 ## changing templates into french
    - base, index, partials
    - account
    - verify all he url on the page
-   - crreating course Model
+   
+   ##      creating courses
+   - create course app and install it
+   - create Course and instructor models
+   - migrate
+   - write the views
+   - set the URLS
+   

@@ -12,11 +12,12 @@ class Instructor(models.Model):
 class Course(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=300)
+    cover_image = models.ImageField(upload_to='courses/' ,blank=True, null=True)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     lessons = models.PositiveIntegerField(default=0)
     students_enrolled = models.PositiveIntegerField(default=0)
-    views = models.PositiveIntegerField(default=0)
-    is_free = models.BooleanField(default=True)
+    is_live = models.BooleanField(default=False)
+    is_free = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

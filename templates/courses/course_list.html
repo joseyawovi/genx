@@ -1,28 +1,61 @@
-{% for course in courses %}
-<div class="course-content-wrap">
-    <div class="course-content">
-        {% if course.is_free %}
-        <span class="offer">Gratuit</span>
-        {% endif %}
-        <h3 class="title">
-            <a href="{% url 'course_detail' course.id %}">{{ course.title }}</a>
-        </h3>
-        <ul class="course-list">
-            <li><i class="fa-light fa-file"></i> {{ course.lessons }} Leçons</li>
-            <li><i class="fa-light fa-user"></i> {{ course.students_enrolled }} Étudiants</li>
-            <li><i class="fa-light fa-eye"></i> {{ course.views|intcomma }} Vues</li>
-        </ul>
-        <div class="course-author-box">
-            <div class="course-author">
-                <div class="author-img">
-                    <img src="{{ course.instructor.profile_image.url }}" alt="instructeur">
-                </div>
-                <div class="author-info">
-                    <h4 class="name">{{ course.instructor }}</h4>
-                    <span>Instructrice</span>
-                </div>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="course-section bg-grey pt-120 pb-120">
+    <div class="shapes">
+        <div class="shape shape-1"><img src="/static/assets/img/shapes/feature-shape-3.png" alt="forme"></div>
+        <div class="shape shape-2"><img src="/static/assets/img/shapes/feature-shape-4.png" alt="forme"></div>
+    </div>
+    <div class="container">
+        <div class="course-top heading-space align-items-end">
+            <div class="section-heading mb-0">
+                <h4 class="sub-heading wow fade-in-bottom" data-wow-delay="200ms"><span class="heading-icon"><i class="fa-sharp fa-solid fa-bolt"></i></span>Formations Populaires</h4>
+                <h2 class="section-title wow fade-in-bottom" data-wow-delay="400ms">Cours en Vedette</h2>
+            </div>
+            <div class="course-top-right wow fade-in-bottom" data-wow-delay="300ms">
+                <a href="course.html" class="ed-primary-btn">Voir Tous les Cours <i class="fa-regular fa-arrow-right"></i></a>
             </div>
         </div>
+        <div class="row gy-4">
+            {% for course in courses %}
+            <div class="col-xl-6 col-lg-12">
+                <div class="course-item course-item-2 wow fade-in-bottom" data-wow-delay="700ms">
+                    <div class="course-thumb-wrap">
+                        <div class="course-thumb">
+                            <img src="/static/assets/img/service/course-img-7.png" alt="cours">
+                        </div>
+                    </div>
+                    <div class="course-content-wrap">
+                        <div class="course-content">
+                            {% if course.is_free %}
+                            <span class="offer">Gratuit</span>
+                            {% endif %}
+                            <h3 class="title"><a href="{% url 'course_detail' course.id %}">{{ course.title }} - Construisez vos Applications</a></h3>
+                            <ul class="course-list">
+                                <li><i class="fa-light fa-file"></i>{{ course.lessons }} Leçons</li>
+                                <li><i class="fa-light fa-user"></i>{{ course.students_enrolled }} Étudiants</li>
+                                {% comment %} <li><i class="fa-light fa-eye"></i>9K Vues</li> {% endcomment %}
+                            </ul>
+                            <div class="course-author-box">
+                                <div class="course-author">
+                                    <div class="author-img">
+                                        <img src="{{ course.instructor.profile_image.url }}" alt="instructeur">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4 class="name">{{ course.instructor }}</h4>
+                                        <span>Instructeur</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
     </div>
-</div>
-{% endfor %}
+</section>
+
+{% endblock content %}
