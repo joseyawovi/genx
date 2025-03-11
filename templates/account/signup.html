@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
+{% load allauth i18n %}
 
 {% block content %}
 <section class="contact-section pt-120 pb-120">
@@ -8,139 +9,146 @@
             <!-- Form Section -->
             <div class="col-lg-7">
                 <div class="blog-contact-form contact-form">
-                    <h2 class="title mb-0">Sign Up</h2>
-                    <p class="mb-30 mt-10">Create an account to access amazing features</p>
+                    <h2 class="title mb-0">{% trans "Sign Up" %}</h2>
+                    <p class="mb-30 mt-10">{% trans "Create an account to access amazing features" %}</p>
                     <div class="request-form">
-                        <form action="{% url 'account_signup' %}" method="post" id="ajax_contact" class="form-horizontal">
-                            {% csrf_token %}
-                            <!-- First Name and Last Name -->
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <div class="form-item">
-                                        {% render_field form.first_name class="form-control" placeholder="Your First Name" %}
-                                        <div class="icon"><i class="fa-regular fa-user"></i></div>
-                                    </div>
-                                    {% if form.first_name.errors %}
-                                        <div class="text-danger">
-                                            {{ form.first_name.errors }}
+                        {% if not SOCIALACCOUNT_ONLY %}
+                            {% url 'account_signup' as action_url %}
+                            <form action="{{ action_url }}" method="post" id="ajax_contact" class="form-horizontal">
+                                {% csrf_token %}
+                                <!-- First Name and Last Name -->
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <div class="form-item">
+                                            {% render_field form.first_name class="form-control" placeholder="Your First Name" %}
+                                            <div class="icon"><i class="fa-regular fa-user"></i></div>
                                         </div>
-                                    {% endif %}
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-item">
-                                        {% render_field form.last_name class="form-control" placeholder="Your Last Name" %}
-                                        <div class="icon"><i class="fa-regular fa-user"></i></div>
+                                        {% if form.first_name.errors %}
+                                            <div class="text-danger">
+                                                {{ form.first_name.errors }}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    {% if form.last_name.errors %}
-                                        <div class="text-danger">
-                                            {{ form.last_name.errors }}
+                                    <div class="col-md-6">
+                                        <div class="form-item">
+                                            {% render_field form.last_name class="form-control" placeholder="Your Last Name" %}
+                                            <div class="icon"><i class="fa-regular fa-user"></i></div>
                                         </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <!-- Email -->
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                    <div class="form-item">
-                                        {% render_field form.email class="form-control" placeholder="Your Email" %}
-                                        <div class="icon"><i class="fa-sharp fa-regular fa-envelope"></i></div>
+                                        {% if form.last_name.errors %}
+                                            <div class="text-danger">
+                                                {{ form.last_name.errors }}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    {% if form.email.errors %}
-                                        <div class="text-danger">
-                                            {{ form.email.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
-                            </div>
-                            <!-- Password 1 -->
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                    <div class="form-item">
-                                        {% render_field form.password1 class="form-control" placeholder="Password" %}
-                                        <div class="icon"><i class="fa-solid fa-lock"></i></div>
+                                <!-- Email -->
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-item">
+                                            {% render_field form.email class="form-control" placeholder="Your Email" %}
+                                            <div class="icon"><i class="fa-sharp fa-regular fa-envelope"></i></div>
+                                        </div>
+                                        {% if form.email.errors %}
+                                            <div class="text-danger">
+                                                {{ form.email.errors }}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    {% if form.password1.errors %}
-                                        <div class="text-danger">
-                                            {{ form.password1.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
-                            </div>
-                            <!-- Password 2 -->
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                    <div class="form-item">
-                                        {% render_field form.password2 class="form-control" placeholder="Confirm Password" %}
-                                        <div class="icon"><i class="fa-solid fa-lock"></i></div>
+                                <!-- Password 1 -->
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-item">
+                                            {% render_field form.password1 class="form-control" placeholder="Password" %}
+                                            <div class="icon"><i class="fa-solid fa-lock"></i></div>
+                                        </div>
+                                        {% if form.password1.errors %}
+                                            <div class="text-danger">
+                                                {{ form.password1.errors }}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    {% if form.password2.errors %}
-                                        <div class="text-danger">
-                                            {{ form.password2.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
-                            </div>
-                            <!-- Submit Button -->
-                            <div class="submit-btn">
-                                <button id="submit" class="ed-primary-btn" type="submit">Submit</button>
-                            </div>
+                                <!-- Password 2 -->
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-item">
+                                            {% render_field form.password2 class="form-control" placeholder="Confirm Password" %}
+                                            <div class="icon"><i class="fa-solid fa-lock"></i></div>
+                                        </div>
+                                        {% if form.password2.errors %}
+                                            <div class="text-danger">
+                                                {{ form.password2.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- Submit Button -->
+                                <div class="submit-btn">
+                                    <button id="submit" class="ed-primary-btn" type="submit">{% trans "Sign Up" %}</button>
+                                </div>
 
-                             <!-- Links for Sign Up and Reset Password -->
-                             <div class="text-center mt-4">
-                                <p class="mb-2">
-                                    <strong>Already have an account?</strong> 
-                                    <a href="{% url 'account_login' %}" class="text-primary">Login</a>
-                                </p>
-                            </div>
-                        </form>
+                                <!-- Links for Sign Up and Reset Password -->
+                                <div class="text-center mt-4">
+                                    <p class="mb-2">
+                                        <strong>{% trans "Already have an account?" %}</strong> 
+                                        <a href="{% url 'account_login' %}" class="text-primary">{% trans "Login" %}</a>
+                                    </p>
+                                </div>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>
 
             <!-- Learning Quotes and LMS-related Information Section -->
-<div class="col-lg-5 col-md-12">
-    <div class="contact-content">
-        <div class="contact-top">
-            <h3 class="title">Learn, Grow, Succeed</h3>
-            <p>"Education is the most powerful weapon which you can use to change the world." – Nelson Mandela</p>
-        </div>
-        <div class="contact-list">
-            <!-- Inspiring Quote -->
-            <div class="list-item">
-                <div class="icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-                <div class="content">
-                    <h4 class="title">Expand Your Knowledge</h4>
-                    <p>“The beautiful thing about learning is that no one can take it away from you.” – B.B. King</p>
+            <div class="col-lg-5 col-md-12">
+                <div class="contact-content">
+                    <div class="contact-top">
+                        <h3 class="title">{% trans "Learn, Grow, Succeed" %}</h3>
+                        <p>"{% trans "Education is the most powerful weapon which you can use to change the world." %}" – Nelson Mandela</p>
+                    </div>
+                    <div class="contact-list">
+                        <!-- Inspiring Quote -->
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">{% trans "Expand Your Knowledge" %}</h4>
+                                <p>“{% trans "The beautiful thing about learning is that no one can take it away from you." %}” – B.B. King</p>
+                            </div>
+                        </div>
+                        <!-- Benefits of LMS -->
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">{% trans "Why Learn With Us?" %}</h4>
+                                <p>{% trans "Get access to high-quality courses, expert instructors, and an interactive learning experience that prepares you for success." %}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Benefits of LMS -->
-            <div class="list-item">
-                <div class="icon">
-                    <i class="fa-solid fa-chalkboard-teacher"></i>
-                </div>
-                <div class="content">
-                    <h4 class="title">Why Learn With Us?</h4>
-                    <p>Get access to high-quality courses, expert instructors, and an interactive learning experience that prepares you for success.</p>
-                </div>
-            </div>
-            <!-- Study Tips -->
-            <div class="list-item">
-                {% comment %} <div class="icon">
-                    <i class="fa-solid fa-lightbulb"></i>
-                </div>
-                <div class="content">
-                    <h4 class="title">Smart Study Tips</h4>
-                    <p>Break study sessions into shorter intervals, stay consistent, and always apply what you learn to real-world problems.</p>
-                </div> {% endcomment %}
-            </div>
-        </div>
-    </div>
-</div>
-
-            
         </div>
     </div>
 </section>
+
+{% if SOCIALACCOUNT_ENABLED %}
+    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+{% endif %}
+
+{% if PASSKEY_SIGNUP_ENABLED %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-7">
+                <hr>
+                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary">{% trans "Sign up using a passkey" %}</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 {% endblock content %}

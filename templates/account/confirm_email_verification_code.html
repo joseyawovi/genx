@@ -1,0 +1,94 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block content %}
+<section class="contact-section pt-120 pb-120">
+    <div class="container">
+        <div class="row gy-lg-0 gy-5">
+            <!-- Form Section -->
+            <div class="col-lg-7">
+                <div class="blog-contact-form contact-form">
+                    <h2 class="title mb-0">{% translate "Enter Email Verification Code" %}</h2>
+                    {% setvar email_link %}
+                        <a href="mailto:{{ email }}" class="text-primary">{{ email }}</a>
+                    {% endsetvar %}
+                    <p class="mb-30 mt-10">
+                        {% blocktranslate %}We’ve sent a code to {{ email_link }}. The code expires shortly, so please enter it soon.{% endblocktranslate %}
+                    </p>
+                    <div class="request-form">
+                        {% url 'account_email_verification_sent' as action_url %}
+                        <form action="{{ action_url }}" method="post" class="form-horizontal">
+                            {% csrf_token %}
+                            <!-- Verification Code Input -->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="form-item">
+                                        {% render_field form.code class="form-control" placeholder="Enter Verification Code" %}
+                                        <div class="icon"><i class="fa-solid fa-shield-check"></i></div>
+                                    </div>
+                                    {% if form.code.errors %}
+                                        <div class="text-danger">
+                                            {{ form.code.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Submit and Cancel Buttons -->
+                            <div class="submit-btn mb-4">
+                                <button type="submit" class="ed-primary-btn">{% translate "Confirm" %}</button>
+                                {% if cancel_url %}
+                                    <a href="{{ cancel_url }}" class="ed-secondary-btn ml-3">{% translate "Cancel" %}</a>
+                                {% else %}
+                                    <button type="submit" form="logout-from-stage" class="ed-secondary-btn ml-3">{% translate "Cancel" %}</button>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inspiring Quote and Learning Information -->
+            <div class="col-lg-5 col-md-12">
+                <div class="contact-content">
+                    <div class="contact-top">
+                        <h3 class="title">{% translate "Stay Secure" %}</h3>
+                        <p>“{% translate "Security is not a product, but a process." %}” – Bruce Schneier</p>
+                    </div>
+                    <div class="contact-list">
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-shield-alt"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">{% translate "Why Verify Your Email?" %}</h4>
+                                <p>{% translate "Email verification ensures your account is secure and helps us protect your data." %}</p>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">{% translate "Check Your Inbox" %}</h4>
+                                <p>{% translate "If you don’t see the email, check your spam or junk folder." %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Logout Form (Hidden) -->
+{% if not cancel_url %}
+    <form id="logout-from-stage" method="post" action="{% url 'account_logout' %}">
+        <input type="hidden" name="next" value="{% url 'account_login' %}">
+        {% csrf_token %}
+    </form>
+{% endif %}
+{% endblock %}

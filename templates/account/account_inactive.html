@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block content %}
+<section class="contact-section pt-120 pb-120">
+    <div class="container">
+        <div class="row gy-lg-0 gy-5">
+            <!-- Message Section -->
+            <div class="col-lg-7">
+                <div class="blog-contact-form contact-form">
+                    <h2 class="title mb-0">{% translate "Account Inactive" %}</h2>
+                    <p class="mb-30 mt-10">{% translate "This account is inactive." %}</p>
+                    <div class="request-form">
+                        <div class="text-center mt-4">
+                            <p class="mb-2">
+                                <strong>{% translate "Need help?" %}</strong> 
+                                <a href="{% url 'contact' %}" class="text-primary">{% translate "Contact support" %}</a>
+                            </p>
+                            <p>
+                                <strong>{% translate "Want to create a new account?" %}</strong> 
+                                <a href="{% url 'account_signup' %}" class="text-primary">{% translate "Sign Up" %}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inspiring Quote and Learning Information -->
+            <div class="col-lg-5 col-md-12">
+                <div class="contact-content">
+                    <div class="contact-top">
+                        <h3 class="title">{% translate "Stay Motivated" %}</h3>
+                        <p>“{% translate "The only limit to our realization of tomorrow is our doubts of today." %}” – Franklin D. Roosevelt</p>
+                    </div>
+                    <div class="contact-list">
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">{% translate "Explore New Opportunities" %}</h4>
+                                <p>{% translate "Create a new account and continue your learning journey with us." %}</p>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">{% translate "Need Assistance?" %}</h4>
+                                <p>{% translate "Our support team is here to help you with any issues." %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

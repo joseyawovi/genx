@@ -6,16 +6,16 @@
                     <ul class="top-bar-list">
                         <li><i class="fa-regular fa-phone"></i><a href="tel:+91 8360443446">+91 8360443446</a></li>
                         <li><i class="fa-regular fa-location-dot"></i><span>258 Helano Street, New York</span></li>
-                        <li><i class="fa-regular fa-clock"></i><span>Mon - Sat: 8:00 - 15:00</span></li>
+                        <li><i class="fa-regular fa-clock"></i><span>Lun - Sam : 8h00 - 15h00</span></li>
                     </ul>
                 </div>
                 <div class="top-bar-right">
                     <div class="register-box">
                         <div class="icon"><i class="fa-regular fa-user"></i></div>
-                        <a href="#">Login / Register</a>
+                        <a href="#">Connexion / Inscription</a>
                     </div>
                     <div class="top-social-wrap">
-                        <span>Follow Us</span>
+                        <span>Suivez-nous</span>
                         <ul class="social-list">
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-instagram"></i></a></li>
@@ -40,72 +40,19 @@
                     <div class="header-menu-wrap">
                         <div class="mobile-menu-items">
                             <ul class="sub-menu">
-                                {% comment %} <li class="menu-item-has-children active">
-                                    <a href="index.html">Home</a>
-                                    <ul>
-                                        <li><a href="index.html">Main Demo</a></li>
-                                        <li><a href="index-2.html">Online Education</a></li>
-                                        <li><a href="index-3.html">Digital Education</a></li>
-                                        <li><a href="index-4.html">Online Course</a></li>
-                                        <li><a href="index-5.html">Eduction Platform</a></li>
-                                        <li><a href="index-6.html">Kindergarten</a></li>
-                                        <li><a href="index-7.html">Online Academy</a></li>
-                                        <li><a href="index-8.html">Online Course</a></li>
-                                        <li><a href="index-9.html">Language Academy</a></li>
-                                    </ul>
-                                </li> {% endcomment %}
-                                <li><a href="{% url 'index' %}">Home</a></li>
+                                <li><a href="{% url 'index' %}">Accueil</a></li>
                                 <li class="menu-item-has-children">
-                                    <a href="course.html">Courses</a>
+                                    <a href="course.html">Cours</a>
                                     <ul>
-                                        <li><a href="course.html">Course</a></li>
-                                        <li><a href="course-details.html">Custom Roadmap</a></li>
+                                        <li><a href=" {% url 'course_list' %}">Cours</a></li>
+                                        <li><a href="course-details.html">Feuille de route personnalisée</a></li>
                                     </ul>
                                 </li>
-                                {% comment %} <li class="menu-item-has-children">
-                                    <a href="shop.html">Shop</a>
-                                    <ul>
-                                        <li><a href="shop.html">Shop</a></li>
-                                        <li><a href="shop-details.html">Shop Details</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                    </ul>
-                                </li> {% endcomment %}
-                                {% comment %} <li class="menu-item-has-children">
-                                    <a href="#">Pages</a>
-                                    <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="teachers.html">Instructor</a></li>
-                                        <li><a href="pricing.html">Pricing Table</a></li>
-                                        <li><a href="event.html">Event</a></li>
-                                        <li><a href="event-details.html">Event Details</a></li>
-                                        <li><a href="error-page.html">404 Error</a></li>
-                                    </ul>
-                                </li> {% endcomment %}
-                                {% comment %} <li class="menu-item-has-children">
-                                    <a href="blog-grid.html">Blog</a>
-                                    <ul>
-                                        <li><a href="blog-grid.html">Blog Post</a></li>
-                                        <li><a href="blog.html">Blog Standard</a></li>
-                                        <li><a href="blog-list.html">Blog List</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li> {% endcomment %}
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </div>
                     </div>
-                    <!-- /.header-menu-wrap -->
                     <div class="header-right">
-                        {% comment %} <div class="header-right-icon d-xl-block d-lg-none">
-                            <a href="wishlist.html"><i class="fa-sharp fa-regular fa-heart"></i></a>
-                            <span class="number">0</span>
-                        </div>
-                        <div class="header-right-icon shop-btn">
-                            <a href="cart.html"><i class="fa-regular fa-cart-shopping"></i></a>
-                            <span class="number">0</span>
-                        </div> {% endcomment %}
                         {% if request.user.is_authenticated %}
                         <form method="post" action="{% url 'account_logout' %}">
                             {% csrf_token %}
@@ -113,11 +60,9 @@
                                 {{ request.user.username }} <i class="fa-sharp fa-regular fa-arrow-right"></i>
                             </button>
                         </form>
-                        
                         {% else %}
-                         <a href="{% url 'account_signup' %}" class="ed-primary-btn header-btn">Sign Up</a>
+                        <a href="{% url 'account_signup' %}" class="ed-primary-btn header-btn">S'inscrire</a>
                         {% endif %}
-                        {% comment %} <a href="contact.html" class="ed-primary-btn header-btn">Get a quote <i class="fa-sharp fa-regular fa-arrow-right"></i></a> {% endcomment %}
                         <div class="header-logo d-none d-lg-none">
                             <a href="{% url 'index' %}">
                                 <img src="/static/assets/img/logo/logo-1.png" alt="Logo">
@@ -129,10 +74,8 @@
                             ></a>
                         </div>
                     </div>
-                    <!-- /.header-right -->
                 </div>
             </div>
-            <!-- /.primary-header-inner -->
         </div>
     </div>
 </header>

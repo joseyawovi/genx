@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="fr">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
 
-        <!-- Site Title -->
-        <title>GenX - Online Education </title>
+        <!-- Titre du site -->
+        <title>GenX - Éducation en Ligne</title>
 
         <!-- Place favicon.ico in the root directory -->
         <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/favicon.png">
 
-        <!-- CSS here -->
+        <!-- CSS ici -->
         <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/assets/css/fontawesome.min.css">
         <link rel="stylesheet" href="/static/assets/css/venobox.min.css">
@@ -26,21 +26,21 @@
     </head>
 
     <body>
-        <!-- header-area-start -->
+        <!-- Démarrage de l'en-tête -->
          {% include 'core/partials/header.html' %}
-        <!-- /.Main Header -->
+        <!-- /.En-tête principale -->
 
         <div id="popup-search-box">
             <div class="box-inner-wrap d-flex align-items-center">
                 <form id="form" action="#" method="get" role="search">
-                    <input id="popup-search" type="text" name="s" placeholder="Type keywords here...">
+                    <input id="popup-search" type="text" name="s" placeholder="Tapez des mots-clés ici...">
                 </form>
                 <div class="search-close"><i class="fa-sharp fa-regular fa-xmark"></i></div>
             </div>
         </div>
         <!-- /#popup-search-box -->
 
-        <div class="mobile-side-menu">
+        {% comment %} <div class="mobile-side-menu">
             <div class="side-menu-content">
                 <div class="side-menu-head">
                     <a href="{% url 'index' %}"><img src="/static/assets/img/logo/logo-1.png" alt="logo"></a>
@@ -48,32 +48,32 @@
                 </div>
                 <div class="side-menu-wrap"></div>
                 <ul class="side-menu-list">
-                    <li><i class="fa-light fa-location-dot"></i>Address : <span>Amsterdam, 109-74</span></li>
-                    <li><i class="fa-light fa-phone"></i>Phone : <a href="tel:+01569896654">+01 569 896 654</a></li>
+                    <li><i class="fa-light fa-location-dot"></i>Adresse : <span>Amsterdam, 109-74</span></li>
+                    <li><i class="fa-light fa-phone"></i>Téléphone : <a href="tel:+01569896654">+01 569 896 654</a></li>
                     <li><i class="fa-light fa-envelope"></i>Email : <a href="mailto:info@example.com">info@example.com</a></li>
                 </ul>
             </div>
-        </div>
-        <!-- /.mobile-side-menu -->
+        </div> {% endcomment %}
+        <!-- /.menu latéral mobile -->
         <div class="mobile-side-menu-overlay"></div>
 
         {% comment %} <div id="preloader">
             <div class="spinner-logo"><img src="/static/assets/img/favicon.png" alt="logo"></div>
             <div class="spinner"></div>
         </div> {% endcomment %}
-        <!-- ./ preloader -->
+        <!-- ./ préchargement -->
 
         {% block content %}{% endblock content %}
         <!-- ./ blog-section -->
          {% include 'core/partials/footer.html' %}
-        <!-- ./ footer-section -->
+        <!-- ./ section de pied de page -->
 
         <div id="scrollup">
             <button id="scroll-top" class="scroll-to-top"><i class="fa-regular fa-arrow-up-long"></i></button>
         </div>
         <!--scrollup-->
 
-        <!-- JS here -->
+        <!-- JS ici -->
         <script src="/static/assets/js/vendor/jquary-3.6.0.min.js"></script>
         <script src="/static/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="/static/assets/js/vendor/bootstrap-bundle.js"></script>

@@ -1,0 +1,28 @@
+{% for course in courses %}
+<div class="course-content-wrap">
+    <div class="course-content">
+        {% if course.is_free %}
+        <span class="offer">Gratuit</span>
+        {% endif %}
+        <h3 class="title">
+            <a href="{% url 'course_detail' course.id %}">{{ course.title }}</a>
+        </h3>
+        <ul class="course-list">
+            <li><i class="fa-light fa-file"></i> {{ course.lessons }} Leçons</li>
+            <li><i class="fa-light fa-user"></i> {{ course.students_enrolled }} Étudiants</li>
+            <li><i class="fa-light fa-eye"></i> {{ course.views|intcomma }} Vues</li>
+        </ul>
+        <div class="course-author-box">
+            <div class="course-author">
+                <div class="author-img">
+                    <img src="{{ course.instructor.profile_image.url }}" alt="instructeur">
+                </div>
+                <div class="author-info">
+                    <h4 class="name">{{ course.instructor }}</h4>
+                    <span>Instructrice</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

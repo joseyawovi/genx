@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'accounts',
     'widget_tweaks',
+    'courses',
 ]
 
 ######################## Allauth. configuration start ####################################
