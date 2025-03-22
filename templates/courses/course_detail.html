@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="course-details pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-12">
+                <div class="course-details-content">
+                    <div class="course-details-img">
+                        <img src="{{ course.image.url }}" alt="course">
+                    </div>
+                    <div class="details-inner">
+                        <ul class="details-meta">
+                            {% if course.is_free %}
+                            <li>Free</li>
+                            {% else %}
+                            <li>Paid</li>
+                            {% endif %}
+                            <li>Latest</li>
+                        </ul>
+                        <h2 class="title">{{ course.title }}</h2>
+                        <ul class="course-details-list">
+                            <li>
+                                <img src="{{ course.instructor.profile_image.url }}" alt="author">
+                                <span>Instructor:</span> {{ course.instructor.username }}
+                            </li>
+                            <li><i class="fa-solid fa-tags"></i>{{ course.category }}</li>
+                            <li><i class="fa-light fa-calendar"></i>{{ course.created_at|date:"d F, Y" }}</li>
+                            <li class="review-wrap">
+                                <ul>
+                                    <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                    <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                    <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                    <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                    <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                </ul>
+                                (4.88)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="course-details-tab">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                                    <i class="fa-sharp fa-regular fa-bookmark"></i>Overview
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                    <i class="fa-regular fa-book"></i>Curriculum
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                    <i class="fa-regular fa-user"></i>Instructor
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contact-tab-2" data-bs-toggle="tab" data-bs-target="#contact-2" type="button" role="tab" aria-controls="contact-2" aria-selected="false">
+                                    <i class="fa-regular fa-star"></i>Reviews
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Overview Tab -->
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-overview">
+                                    <h3 class="title">Description</h3>
+                                    <p class="mb-30">{{ course.description }}</p>
+                                    <h3 class="title">What Will You Learn?</h3>
+                                    <p class="mb-0">{{ course.learning_outcomes }}</p>
+                                </div>
+                            </div>
+                            <!-- Curriculum Tab -->
+                                    <!-- Curriculum Tab -->
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="curriculam-area">
+        <div class="accordion" id="accordionExample">
+            {% for module in modules %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ module.id }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ module.id }}" aria-expanded="true" aria-controls="collapse{{ module.id }}">
+                        {{ module.title }}
+                    </button>
+                </h2>
+                <div id="collapse{{ module.id }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ module.id }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul class="curri-list">
+                            {% for lesson in module.lessons.all %}
+                            <li>
+                                <span><i class="fa-regular fa-video"></i>{{ lesson.title }}</span>
+                                <span>{{ lesson.duration }} <i class="fa-regular fa-unlock"></i></span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+                            <!-- Instructor Tab -->
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="row team-wrap-2 gy-lg-0 gy-4 justify-content-center">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="team-item-3 team-item-5">
+                                            <div class="team-thumb">
+                                                <div class="shape"><img src="/static/assets/img/shapes/team-shape-3.png" alt="team"></div>
+                                                <div class="team-men">
+                                                    <img src="{{ course.instructor.profile_image.url }}" alt="team">
+                                                </div>
+                                            </div>
+                                            <div class="team-content">
+                                                <h3 class="title">{{ course.instructor.username }}</h3>
+                                                <span>Instructor</span>
+                                                <ul class="social-list">
+                                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                                    <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Reviews Tab -->
+                            <div class="tab-pane fade" id="contact-2" role="tabpanel" aria-labelledby="contact-tab-2">
+                                <div class="reviewr-wrap">
+                                    <div class="review-list">
+                                        <!-- Add dynamic reviews here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar -->
+            <div class="col-xl-3 col-lg-12">
+                <div class="course-sidebar price-box">
+    <h4 class="price">
+        {% if course.is_free %}
+            Free
+        {% else %}
+            ${{ course.price }} <span>25% off</span>
+        {% endif %}
+    </h4>
+    {% comment %}
+    <a href="cart.html" class="ed-primary-btn">Add to Cart</a>
+    {% endcomment %}
+    {% if course.is_free %}
+        <a href="{% url 'enroll_course' course.id %}" class="ed-primary-btn buy-btn">Enroll Now</a>
+    {% else %}
+        <button class="ed-primary-btn buy-btn" disabled>Payment Not Available</button>
+    {% endif %}
+</div>
+                <div class="course-sidebar sticky-widget">
+                    <h4 class="sidebar-title">Course Information</h4>
+                    <ul class="course-sidebar-list">
+                        <li><i class="fa-regular fa-house-chimney"></i>Instructor: <span>{{ course.instructor.username }}</span></li>
+                        <li><i class="fa-regular fa-book"></i>Lessons: <span>{{ course.total_lessons }}</span></li>
+                        <li><i class="fa-regular fa-clock"></i>Duration: <span>{{ course.total_duration }}</span></li>
+                        <li><i class="fa-regular fa-tag"></i>Course level: <span>{{ course.level }}</span></li>
+                        <li><i class="fa-regular fa-globe"></i>Language: <span>{{ course.language }}</span></li>
+                        <li><i class="fa-regular fa-puzzle-piece"></i>Quizzes: <span>{{ course.total_quizzes }}</span></li>
+                    </ul>
+                    <div class="share-btn">
+                        <button class="ed-primary-btn"><i class="fa-regular fa-share-nodes"></i>Share This Course</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="lesson-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="lesson-detail-content">
+                    <!-- Left Column: Video Frame -->
+                    <div class="lesson-video">
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{ lesson.youtube_video_id }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Right Column: Lesson Details -->
+                    <div class="lesson-sidebar">
+                        <!-- Course Progress -->
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ enrollment.progress }}%;" aria-valuenow="{{ enrollment.progress }}" aria-valuemin="0" aria-valuemax="100">
+                                {{ enrollment.progress }}% Complete
+                            </div>
+                        </div>
+
+                        <!-- Lesson Details -->
+                        <div class="lesson-info">
+                            <h4>Lesson Details</h4>
+                            <ul>
+                                <li><strong>Title:</strong> {{ lesson.title }}</li>
+                                <li><strong>Duration:</strong> {{ lesson.duration }}</li>
+                                <li><strong>Module:</strong> {{ lesson.module.title }}</li>
+                            </ul>
+                        </div>
+
+                        <!-- Instructor Details -->
+                        <div class="instructor-info">
+                            <h4>Instructor</h4>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ enrollment.course.instructor.profile_image.url }}" alt="{{ enrollment.course.instructor.username }}" class="rounded-circle me-3" width="50" height="50">
+                                <div>
+                                    <strong>{{ enrollment.course.instructor.username }}</strong>
+                                    <p class="mb-0">Course Instructor</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Completion Message (if course is completed) -->
+                        {% if enrollment.is_course_completed %}
+                        <div class="completion-message">
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Congratulations!</h4>
+                                <p>You have successfully completed the course <strong>{{ enrollment.course.title }}</strong>.</p>
+                                <hr>
+                                <p class="mb-0">
+                                    <a href="{% url 'generate_certificate' enrollment.course.id %}" class="btn btn-primary">
+                                        <i class="fa-regular fa-download"></i> Download Certificate
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Lesson Navigation -->
+                <div class="lesson-navigation">
+                    {% if previous_lesson %}
+                    <a href="{% url 'lesson_detail' previous_lesson.id %}" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-left"></i> Previous Lesson
+                    </a>
+                    {% endif %}
+                    <form method="post" action="{% url 'mark_lesson_completed' lesson.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn {% if lesson.id in completed_lesson_ids %}btn-secondary disabled{% else %}btn-success{% endif %}" {% if lesson.id in completed_lesson_ids %}disabled{% endif %}>
+                            <i class="fa-solid fa-check"></i> {% if lesson.id in completed_lesson_ids %}Completed{% else %}Mark as Completed{% endif %}
+                        </button>
+                    </form>
+                    {% if next_lesson %}
+                    <a href="{% url 'lesson_detail' next_lesson.id %}" class="btn btn-primary">
+                        Next Lesson <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

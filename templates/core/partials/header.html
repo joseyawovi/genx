@@ -54,12 +54,7 @@
                     </div>
                     <div class="header-right">
                         {% if request.user.is_authenticated %}
-                        <form method="post" action="{% url 'account_logout' %}">
-                            {% csrf_token %}
-                            <button type="submit" class="ed-primary-btn header-btn">
-                                {{ request.user.username }} <i class="fa-sharp fa-regular fa-arrow-right"></i>
-                            </button>
-                        </form>
+                        <a href="{% url 'dashboard' %}" class="ed-primary-btn">My Dashboard</a>
                         {% else %}
                         <a href="{% url 'account_signup' %}" class="ed-primary-btn header-btn">S'inscrire</a>
                         {% endif %}

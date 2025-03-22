@@ -10,11 +10,13 @@
     <div class="container">
         <div class="course-top heading-space align-items-end">
             <div class="section-heading mb-0">
-                <h4 class="sub-heading wow fade-in-bottom" data-wow-delay="200ms"><span class="heading-icon"><i class="fa-sharp fa-solid fa-bolt"></i></span>Formations Populaires</h4>
+                <h4 class="sub-heading wow fade-in-bottom" data-wow-delay="200ms">
+                    <span class="heading-icon"><i class="fa-sharp fa-solid fa-bolt"></i></span>Formations Populaires
+                </h4>
                 <h2 class="section-title wow fade-in-bottom" data-wow-delay="400ms">Cours en Vedette</h2>
             </div>
             <div class="course-top-right wow fade-in-bottom" data-wow-delay="300ms">
-                <a href="course.html" class="ed-primary-btn">Voir Tous les Cours <i class="fa-regular fa-arrow-right"></i></a>
+                <a href="{% url 'course_list' %}" class="ed-primary-btn">Voir Tous les Cours <i class="fa-regular fa-arrow-right"></i></a>
             </div>
         </div>
         <div class="row gy-4">
@@ -31,11 +33,12 @@
                             {% if course.is_free %}
                             <span class="offer">Gratuit</span>
                             {% endif %}
-                            <h3 class="title"><a href="{% url 'course_detail' course.id %}">{{ course.title }} - Construisez vos Applications</a></h3>
+                            <h3 class="title">
+                                <a href="{% url 'course_detail' course.id %}">{{ course.title }}</a>
+                            </h3>
                             <ul class="course-list">
-                                <li><i class="fa-light fa-file"></i>{{ course.lessons }} Leçons</li>
+                                <li><i class="fa-light fa-file"></i>{{ course.modules.count }} Modules</li>
                                 <li><i class="fa-light fa-user"></i>{{ course.students_enrolled }} Étudiants</li>
-                                {% comment %} <li><i class="fa-light fa-eye"></i>9K Vues</li> {% endcomment %}
                             </ul>
                             <div class="course-author-box">
                                 <div class="course-author">
@@ -43,7 +46,7 @@
                                         <img src="{{ course.instructor.profile_image.url }}" alt="instructeur">
                                     </div>
                                     <div class="author-info">
-                                        <h4 class="name">{{ course.instructor }}</h4>
+                                        <h4 class="name">{{ course.instructor.username }}</h4>
                                         <span>Instructeur</span>
                                     </div>
                                 </div>
@@ -53,7 +56,6 @@
                 </div>
             </div>
             {% endfor %}
-
         </div>
     </div>
 </section>
